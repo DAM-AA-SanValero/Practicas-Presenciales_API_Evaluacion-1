@@ -1,11 +1,13 @@
 package com.svalero.clothshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,17 +20,21 @@ public class Client {
     private long id;
 
     @Column
-    @NotBlank(message = "<-- Este campo no puede estar vacio")
-    @NotNull(message = "<-- Este campo es obligatorio")
+    @NotBlank(message = ":This field can't be blank")
+    @NotNull(message = ":This field is required")
     private String name;
 
     @Column
-    @NotBlank(message = "<-- Este campo no puede estar vacio")
-    @NotNull(message = "<-- Este campo es obligatorio")
+    @NotBlank(message = ":This field can't be empty")
+    @NotNull(message = ":This field is required")
     private String address;
 
     @Column
-    @PositiveOrZero(message = "<-- Este campo solo puede contener números positivos y 0")
+    @PositiveOrZero(message = ":This field can only contain positive numbers or zero")
     private int account;
+
+    @OneToMany(mappedBy = "id")
+    @JsonBackReference(value = "user-product")
+    private List<Product> products;
 
 }

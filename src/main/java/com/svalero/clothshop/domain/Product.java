@@ -18,16 +18,24 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
-    @NotNull(message = "<-- Este campo es obligatorio")
-    @Positive(message = "<-- Este campo solo puede contener números positivos y es obligatorio")
+    @NotNull(message = ":This field is required")
+    @Positive(message = ":This field can only contain positive numbers")
     private float price;
 
+
     @Column
-    @NotNull(message = "<-- Este campo es obligatorio")
-    @Positive(message = "<-- Este campo solo puede contener números positivos y es obligatorio")
+    @NotNull(message = ":This field is required")
+    @Positive(message = ":This field can only contain positive numbers")
     private float size;
     @Column
     private boolean available;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client_id;
+    @ManyToOne
+    @JoinColumn(name = "discount_id")
+    private Discount discount_id;
 
 
 }
