@@ -3,9 +3,10 @@ package com.svalero.clothshop.service;
 import com.svalero.clothshop.domain.Discount;
 import com.svalero.clothshop.repository.DiscountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class DiscountServiceImpl implements DiscountService{
 
     @Autowired

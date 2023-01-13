@@ -10,9 +10,9 @@ public interface ProductService {
     List<Product> findAll();
     Product findById(long id);
 
-    Product addClient(Product product);
+    Product addProduct(Product product);
 
-    void deleteClient(long id);
+    void deleteProduct(long id);
 
     Product updateProduct(long id, Product updateProduct);
     Product updateProductStock(long id, boolean updateStock);

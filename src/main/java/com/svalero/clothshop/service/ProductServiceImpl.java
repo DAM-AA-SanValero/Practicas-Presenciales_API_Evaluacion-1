@@ -3,9 +3,11 @@ package com.svalero.clothshop.service;
 import com.svalero.clothshop.domain.Product;
 import com.svalero.clothshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ProductServiceImpl implements ProductService{
 
     @Autowired
@@ -22,12 +24,12 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product addClient(Product product) {
+    public Product addProduct(Product product) {
         return productRepository.save(product);
     }
 
     @Override
-    public void deleteClient(long id) {
+    public void deleteProduct(long id) {
         Product product = productRepository.findById(id).orElseThrow();
         productRepository.delete(product);
     }
