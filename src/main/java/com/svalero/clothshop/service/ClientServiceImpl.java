@@ -1,6 +1,7 @@
 package com.svalero.clothshop.service;
 
 import com.svalero.clothshop.domain.Client;
+import com.svalero.clothshop.exception.ClientNotFoundException;
 import com.svalero.clothshop.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client findById(long id) {
+    public Client findById(long id) throws ClientNotFoundException {
         return clientRepository.findById(id).orElseThrow();
     }
 
@@ -27,13 +28,13 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void deleteClient(long id) {
+    public void deleteClient(long id) throws ClientNotFoundException {
         Client client = clientRepository.findById(id).orElseThrow();
         clientRepository.delete(client);
     }
 
     @Override
-    public Client updateClient(long id, Client newClient) {
+    public Client updateClient(long id, Client newClient) throws ClientNotFoundException{
         Client client = clientRepository.findById(id).orElseThrow();
         client.setName(newClient.getName());
         client.setAddress(newClient.getAddress());
@@ -42,14 +43,14 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client updateClientAddress(long id, String newAddress) {
+    public Client updateClientAddress(long id, String newAddress) throws ClientNotFoundException {
         Client client = clientRepository.findById(id).orElseThrow();
         client.setAddress(newAddress);
         return clientRepository.save(client);
     }
 
     @Override
-    public List<Client> findByName(String name) {
+    public List<Client> findByName(String name) throws ClientNotFoundException{
         return clientRepository.findByName(name);
     }
 }

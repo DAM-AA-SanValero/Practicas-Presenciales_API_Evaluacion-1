@@ -27,7 +27,8 @@ public class DiscountController {
     DiscountService discountService;
 
     @GetMapping("/discounts")
-    public ResponseEntity<List<Discount>> getDiscounts(@RequestParam(name = "event", defaultValue = "") String event) {
+    public ResponseEntity<List<Discount>> getDiscounts(@RequestParam(name = "event", defaultValue = "")
+                                                           String event) throws DiscountNotFoundException {
         if (event.equals("")) {
             logger.info("Lista de descuentos");
             return ResponseEntity.status(200).body(discountService.findAll());
@@ -37,7 +38,7 @@ public class DiscountController {
     }
 
     @GetMapping("/discounts/{id}")
-    public ResponseEntity<Discount> getDiscountId(@PathVariable long id){
+    public ResponseEntity<Discount> getDiscountId(@PathVariable long id) throws DiscountNotFoundException{
         Discount discount = discountService.findById(id);
         logger.info("Búsqueda por id del descuento");
         return ResponseEntity.status(200).body(discount);
@@ -51,21 +52,23 @@ public class DiscountController {
     }
 
     @DeleteMapping("/discounts/{id}")
-    public ResponseEntity<Void> deleteDiscount(@PathVariable long id){
+    public ResponseEntity<Void> deleteDiscount(@PathVariable long id) throws DiscountNotFoundException{
         discountService.deleteDiscount(id);
         logger.info("Descuento eliminado");
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/discounts/{id}")
-    public ResponseEntity<Discount> updateDiscount(@PathVariable long id, @RequestBody Discount discount){
+    public ResponseEntity<Discount> updateDiscount(@PathVariable long id,
+                                                   @RequestBody Discount discount) throws DiscountNotFoundException{
         Discount newDiscount = discountService.updateDiscount(id,discount);
         logger.info("Descuento actualizado");
         return ResponseEntity.status(200).body(newDiscount);
     }
 
     @PatchMapping("/discounts/{id}")
-    public ResponseEntity<Discount> updateDiscountPrice(@PathVariable long id, @RequestBody Discount discount){
+    public ResponseEntity<Discount> updateDiscountPrice(@PathVariable long id,
+                                                        @RequestBody Discount discount) throws DiscountNotFoundException{
         Discount updateDiscountPrice = discountService.updateDiscountPrice(id, discount.getDiscountedPrice());
         logger.info("Precio de descuento actualizado");
         return ResponseEntity.status(200).body(updateDiscountPrice);

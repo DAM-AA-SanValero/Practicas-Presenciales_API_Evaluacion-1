@@ -1,6 +1,7 @@
 package com.svalero.clothshop.service;
 
 import com.svalero.clothshop.domain.Discount;
+import com.svalero.clothshop.exception.DiscountNotFoundException;
 import com.svalero.clothshop.repository.DiscountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class DiscountServiceImpl implements DiscountService{
     }
 
     @Override
-    public Discount findById(long id) {
+    public Discount findById(long id) throws DiscountNotFoundException {
         return discountRepository.findById(id).orElseThrow();
     }
 
@@ -27,13 +28,13 @@ public class DiscountServiceImpl implements DiscountService{
     }
 
     @Override
-    public void deleteDiscount(long id) {
+    public void deleteDiscount(long id) throws DiscountNotFoundException {
         Discount discount = discountRepository.findById(id).orElseThrow();
         discountRepository.delete(discount);
     }
 
     @Override
-    public Discount updateDiscount(long id, Discount newDiscount) {
+    public Discount updateDiscount(long id, Discount newDiscount) throws DiscountNotFoundException {
         Discount discount = discountRepository.findById(id).orElseThrow();
         discount.setEvent(newDiscount.getEvent());
         discount.setDiscountDate(newDiscount.getDiscountDate());
@@ -43,14 +44,14 @@ public class DiscountServiceImpl implements DiscountService{
     }
 
     @Override
-    public Discount updateDiscountPrice(long id, float newPrice) {
+    public Discount updateDiscountPrice(long id, float newPrice) throws DiscountNotFoundException {
         Discount discount = discountRepository.findById(id).orElseThrow();
         discount.setDiscountedPrice(newPrice);
         return discountRepository.save(discount);
     }
 
     @Override
-    public List<Discount> findByEvent(String event) {
+    public List<Discount> findByEvent(String event) throws DiscountNotFoundException {
         return discountRepository.findByEvent(event);
     }
 }

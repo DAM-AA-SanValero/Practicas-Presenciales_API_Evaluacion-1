@@ -26,7 +26,8 @@ public class ClientController {
     ClientService clientService;
 
     @GetMapping("/clients")
-    public ResponseEntity<List<Client>> getClients(@RequestParam(name = "name", defaultValue = "") String name) {
+    public ResponseEntity<List<Client>> getClients(@RequestParam(name = "name", defaultValue = "")
+                                                       String name) throws ClientNotFoundException {
         if (name.equals("")) {
             logger.info("Lista de clientes mostrada");
             return ResponseEntity.status(200).body(clientService.findAll());
@@ -36,35 +37,37 @@ public class ClientController {
     }
 
     @GetMapping("/clients/{id}")
-    public ResponseEntity<Client> getClientId(@PathVariable long id){
+    public ResponseEntity<Client> getClientId(@PathVariable long id) throws ClientNotFoundException{
         Client client = clientService.findById(id);
         logger.info("Búsqueda por id de cliente");
         return ResponseEntity.status(200).body(client);
     }
 
     @PostMapping("/clients")
-    public ResponseEntity<Client> addClient(@Valid @RequestBody Client client) {
+    public ResponseEntity<Client> addClient(@Valid @RequestBody Client client)  {
         Client newClient = clientService.addClient(client);
         logger.info("Cliente añadido");
         return ResponseEntity.status(201).body(newClient);
     }
 
     @DeleteMapping("/clients/{id}")
-    public ResponseEntity<Void> deleteClient(@PathVariable long id){
+    public ResponseEntity<Void> deleteClient(@PathVariable long id) throws ClientNotFoundException{
         clientService.deleteClient(id);
         logger.info("Cliente eliminado");
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/clients/{id}")
-    public ResponseEntity<Client> updateClient(@PathVariable long id, @RequestBody Client client){
+    public ResponseEntity<Client> updateClient(@PathVariable long id,
+                                               @RequestBody Client client) throws ClientNotFoundException{
         Client newClient = clientService.updateClient(id,client);
         logger.info("Cliente actualizado");
         return ResponseEntity.status(200).body(newClient);
     }
 
     @PatchMapping("/clients/{id}")
-    public ResponseEntity<Client> updateClientAddress(@PathVariable long id, @RequestBody Client client){
+    public ResponseEntity<Client> updateClientAddress(@PathVariable long id,
+                                                      @RequestBody Client client) throws ClientNotFoundException{
         Client updateAddress = clientService.updateClientAddress(id, client.getAddress());
         logger.info("Actualizada la dirección del cliente");
         return ResponseEntity.status(200).body(updateAddress);

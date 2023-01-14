@@ -1,6 +1,7 @@
 package com.svalero.clothshop.service;
 
 import com.svalero.clothshop.domain.Product;
+import com.svalero.clothshop.exception.ProductNotFoundException;
 import com.svalero.clothshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product findById(long id) {
+    public Product findById(long id) throws ProductNotFoundException {
         return productRepository.findById(id).orElseThrow();
     }
 
@@ -29,13 +30,13 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void deleteProduct(long id) {
+    public void deleteProduct(long id) throws ProductNotFoundException {
         Product product = productRepository.findById(id).orElseThrow();
         productRepository.delete(product);
     }
 
     @Override
-    public Product updateProduct(long id, Product newProduct) {
+    public Product updateProduct(long id, Product newProduct) throws ProductNotFoundException {
         Product product = productRepository.findById(id).orElseThrow();
         product.setSize(newProduct.getSize());
         product.setAvailable(newProduct.isAvailable());
@@ -44,14 +45,14 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product updateProductStock(long id, boolean updatingStock) {
+    public Product updateProductStock(long id, boolean updatingStock) throws ProductNotFoundException {
         Product product = productRepository.findById(id).orElseThrow();
         product.setAvailable(updatingStock);
         return productRepository.save(product);
     }
 
     @Override
-    public List<Product> findByAvailable(boolean availability) {
+    public List<Product> findByAvailable(boolean availability) throws ProductNotFoundException{
         return productRepository.findByAvailable(availability);
     }
 }

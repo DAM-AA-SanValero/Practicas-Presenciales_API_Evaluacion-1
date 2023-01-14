@@ -27,7 +27,8 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts(@RequestParam(name = "available", defaultValue = "") String available) {
+    public ResponseEntity<List<Product>> getProducts(@RequestParam(name = "available", defaultValue = "")
+                                                         String available) throws ProductNotFoundException {
         if (available.equals("")) {
             logger.info("Lista de productos");
             return ResponseEntity.status(200).body(productService.findAll());
@@ -37,7 +38,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}")
-    public ResponseEntity<Product> getProductId(@PathVariable long id){
+    public ResponseEntity<Product> getProductId(@PathVariable long id) throws ProductNotFoundException{
         Product product = productService.findById(id);
         logger.info("Búsqueda del producto por id");
         return ResponseEntity.status(200).body(product);
@@ -51,21 +52,23 @@ public class ProductController {
     }
 
     @DeleteMapping("/products/{id}")
-    public ResponseEntity<Void> deleteProducts(@PathVariable long id){
+    public ResponseEntity<Void> deleteProducts(@PathVariable long id) throws ProductNotFoundException{
         productService.deleteProduct(id);
         logger.info("Producto eliminado");
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/products/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable long id, @RequestBody Product product){
+    public ResponseEntity<Product> updateProduct(@PathVariable long id,
+                                                 @RequestBody Product product) throws ProductNotFoundException{
         Product newProduct = productService.updateProduct(id,product);
         logger.info("Producto actualizado");
         return ResponseEntity.status(200).body(newProduct);
     }
 
     @PatchMapping("/products/{id}")
-    public ResponseEntity<Product> updateProductStock(@PathVariable long id, @RequestBody Product product){
+    public ResponseEntity<Product> updateProductStock(@PathVariable long id,
+                                                      @RequestBody Product product) throws ProductNotFoundException{
         Product updateStock = productService.updateProductStock(id, product.isAvailable());
         logger.info("Stock actualizado");
         return ResponseEntity.status(200).body(updateStock);
