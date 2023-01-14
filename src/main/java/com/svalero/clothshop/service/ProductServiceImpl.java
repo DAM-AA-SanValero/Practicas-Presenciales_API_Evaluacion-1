@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product findById(long id) throws ProductNotFoundException {
-        return productRepository.findById(id).orElseThrow();
+        return productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
     }
 
     @Override
@@ -31,13 +31,13 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void deleteProduct(long id) throws ProductNotFoundException {
-        Product product = productRepository.findById(id).orElseThrow();
+        Product product = productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
         productRepository.delete(product);
     }
 
     @Override
     public Product updateProduct(long id, Product newProduct) throws ProductNotFoundException {
-        Product product = productRepository.findById(id).orElseThrow();
+        Product product = productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
         product.setSize(newProduct.getSize());
         product.setAvailable(newProduct.isAvailable());
         product.setPrice(newProduct.getPrice());
@@ -46,7 +46,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product updateProductStock(long id, boolean updatingStock) throws ProductNotFoundException {
-        Product product = productRepository.findById(id).orElseThrow();
+        Product product = productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
         product.setAvailable(updatingStock);
         return productRepository.save(product);
     }

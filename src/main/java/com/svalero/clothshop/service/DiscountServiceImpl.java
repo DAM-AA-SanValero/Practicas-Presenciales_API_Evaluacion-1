@@ -19,7 +19,7 @@ public class DiscountServiceImpl implements DiscountService{
 
     @Override
     public Discount findById(long id) throws DiscountNotFoundException {
-        return discountRepository.findById(id).orElseThrow();
+        return discountRepository.findById(id).orElseThrow(DiscountNotFoundException::new);
     }
 
     @Override
@@ -29,13 +29,13 @@ public class DiscountServiceImpl implements DiscountService{
 
     @Override
     public void deleteDiscount(long id) throws DiscountNotFoundException {
-        Discount discount = discountRepository.findById(id).orElseThrow();
+        Discount discount = discountRepository.findById(id).orElseThrow(DiscountNotFoundException::new);
         discountRepository.delete(discount);
     }
 
     @Override
     public Discount updateDiscount(long id, Discount newDiscount) throws DiscountNotFoundException {
-        Discount discount = discountRepository.findById(id).orElseThrow();
+        Discount discount = discountRepository.findById(id).orElseThrow(DiscountNotFoundException::new);
         discount.setEvent(newDiscount.getEvent());
         discount.setDiscountDate(newDiscount.getDiscountDate());
         discount.setDiscountedPrice(newDiscount.getDiscountedPrice());
@@ -45,7 +45,7 @@ public class DiscountServiceImpl implements DiscountService{
 
     @Override
     public Discount updateDiscountPrice(long id, float newPrice) throws DiscountNotFoundException {
-        Discount discount = discountRepository.findById(id).orElseThrow();
+        Discount discount = discountRepository.findById(id).orElseThrow(DiscountNotFoundException::new);
         discount.setDiscountedPrice(newPrice);
         return discountRepository.save(discount);
     }

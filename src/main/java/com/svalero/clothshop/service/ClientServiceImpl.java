@@ -19,7 +19,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client findById(long id) throws ClientNotFoundException {
-        return clientRepository.findById(id).orElseThrow();
+        return clientRepository.findById(id).orElseThrow(ClientNotFoundException::new);
     }
 
     @Override
@@ -29,13 +29,13 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void deleteClient(long id) throws ClientNotFoundException {
-        Client client = clientRepository.findById(id).orElseThrow();
+        Client client = clientRepository.findById(id).orElseThrow(ClientNotFoundException::new);
         clientRepository.delete(client);
     }
 
     @Override
     public Client updateClient(long id, Client newClient) throws ClientNotFoundException{
-        Client client = clientRepository.findById(id).orElseThrow();
+        Client client = clientRepository.findById(id).orElseThrow(ClientNotFoundException::new);
         client.setName(newClient.getName());
         client.setAddress(newClient.getAddress());
         client.setAccount(newClient.getAccount());
@@ -44,7 +44,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client updateClientAddress(long id, String newAddress) throws ClientNotFoundException {
-        Client client = clientRepository.findById(id).orElseThrow();
+        Client client = clientRepository.findById(id).orElseThrow(ClientNotFoundException::new);
         client.setAddress(newAddress);
         return clientRepository.save(client);
     }

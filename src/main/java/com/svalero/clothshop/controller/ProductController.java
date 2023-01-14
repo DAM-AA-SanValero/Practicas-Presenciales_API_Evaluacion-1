@@ -93,7 +93,7 @@ public class ProductController {
 
         logger.error(manve.getMessage(),manve);
         ErrorMessage badRequest = new ErrorMessage(400, "Bad Request", errors);
-        return new ResponseEntity<>(badRequest, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(badRequest, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)

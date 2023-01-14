@@ -2,7 +2,7 @@
 <configuration>
     <!-- Propiedades que se usará para indicar dónde almacenar los logs y cómo se llama el fichero -->
     <property name="LOG_DIR" value="logs" />
-    <property name="LOG_NAME" value="buses" />
+    <property name="LOG_NAME" value="clothshop" />
 
     <!-- Configuración del log que aparece por consola: Console appender -->
     <appender name="Console"

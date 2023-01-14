@@ -77,7 +77,7 @@ public class ClientController {
     public ResponseEntity<ErrorMessage> clientNotFoundException(ClientNotFoundException cnfe){
         logger.error(cnfe.getMessage(),cnfe);
         ErrorMessage notfound = new ErrorMessage(404,cnfe.getMessage());
-        return new ResponseEntity<>(notfound, HttpStatus.NOT_FOUND);
+        return new ResponseEntity(notfound, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
