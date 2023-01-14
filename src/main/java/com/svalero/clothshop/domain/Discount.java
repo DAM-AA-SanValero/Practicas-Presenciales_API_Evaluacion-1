@@ -21,14 +21,19 @@ public class Discount {
     private long id;
 
     @Column
-    @NotBlank(message = "<-- Este campo no puede estar vacio")
-    @NotNull(message = "<-- Este campo es obligatorio")
+    @NotBlank(message = ":This field can't be empty")
+    @NotNull(message = ":This field is required")
     private String event;
     @Column
     private LocalDate discountDate;
 
     @Column
-    @NotNull(message = "<-- Este campo es obligatorio")
-    @Positive(message = "<-- Este campo solo puede contener números positivos y es obligatorio")
+    @NotNull(message = ":This field is required")
+    @Positive(message = ":This field can only contain positive numbers")
     private float discountedPrice;
+
+    @OneToMany(mappedBy = "id")
+    @JsonBackReference(value = "dicount-product")
+    private List<Product> products;
+
 }

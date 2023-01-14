@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -21,17 +20,20 @@ public class Client {
     private long id;
 
     @Column
-    @NotBlank(message = "<-- Este campo no puede estar vacio")
-    @NotNull(message = "<-- Este campo es obligatorio")
+    @NotBlank(message = ":This field can't be blank")
+    @NotNull(message = ":This field is required")
     private String name;
 
     @Column
-    @NotBlank(message = "<-- Este campo no puede estar vacio")
-    @NotNull(message = "<-- Este campo es obligatorio")
+    @NotBlank(message = ":This field can't be empty")
+    @NotNull(message = ":This field is required")
     private String address;
 
     @Column
-    @PositiveOrZero(message = "<-- Este campo solo puede contener números positivos y 0")
+    @PositiveOrZero(message = ":This field can only contain positive numbers or zero")
     private int account;
+
+    @OneToMany(mappedBy = "id")
+    private List<Product> products;
 
 }
