@@ -36,9 +36,8 @@
     </appender>
 
     <!-- Define el nivel de log para cada appender -->
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </root>
-
 </configuration>

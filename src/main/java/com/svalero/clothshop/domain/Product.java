@@ -1,5 +1,6 @@
 package com.svalero.clothshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
+    @JsonBackReference(value = "user-product")
     private Client client_id;
     @ManyToOne
     @JoinColumn(name = "discount_id")

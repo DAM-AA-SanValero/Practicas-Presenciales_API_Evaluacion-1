@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +43,7 @@ public class ClientController {
     }
 
     @PostMapping("/clients")
-    public ResponseEntity<Client> addClient(@Valid @RequestBody Client client)  {
+    public ResponseEntity<Client> addClient(@RequestBody Client client)  {
         Client newClient = clientService.addClient(client);
         logger.info("Cliente añadido");
         return ResponseEntity.status(201).body(newClient);

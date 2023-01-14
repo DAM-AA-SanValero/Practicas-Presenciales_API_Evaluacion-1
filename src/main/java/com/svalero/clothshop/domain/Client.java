@@ -34,7 +34,6 @@ public class Client {
     private int account;
 
     @OneToMany(mappedBy = "id")
-    @JsonBackReference(value = "user-product")
     private List<Product> products;
 
 }

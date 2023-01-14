@@ -78,7 +78,7 @@ public class DiscountController {
     public ResponseEntity<ErrorMessage> discountNotFoundException(DiscountNotFoundException dnfe){
         logger.error(dnfe.getMessage(),dnfe);
         ErrorMessage notfound = new ErrorMessage(404,dnfe.getMessage());
-        return new ResponseEntity(notfound, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(notfound, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
