@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "acee12f7-56b2-4119-ba4c-793f1c7a6a1b",
+		"name": "Clientes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "clients",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "clients?name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/clients?name=David",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"clients"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "David"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clients/{id}",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "clients",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:0991/clients/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "0991",
+					"path": [
+						"clients",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clients/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/clients/33",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"clients",
+						"33"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clients/{id}",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/clients/65",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"clients",
+						"65"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clients/{id}",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/clients/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"clients",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
